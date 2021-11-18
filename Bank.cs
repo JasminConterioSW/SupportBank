@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -33,7 +34,34 @@ namespace SupportBank
             return parsedTransactions;
         }
 
-        
+        public static Dictionary<string,Account> PopulateNewAccountDictionary(List<Transaction> parsedTransactions)
+        {
+            // Complete but not properly tested
+            List<string> uniqueNames = Account.GetNames(parsedTransactions);
+            Dictionary<string,Account> allAccounts = Account.InitialiseAccountDictionary(uniqueNames);
+            
+            foreach (var t in parsedTransactions)
+            {
+                string nameTo = t.NameTo;
+                string nameFrom = t.NameFrom;
+                decimal amount = t.Amount;
+
+                allAccounts[nameTo].Balance += amount;
+                allAccounts[nameFrom].Balance -= amount;
+
+            }
+
+            return allAccounts;
+        }
+
+        /*public static void PrintAllAccounts(Dictionary<string,Account> allAccounts)
+        { // very much incomplete
+            foreach (KeyValuePair acc in allAccounts)
+            {
+
+                allAccounts.PrintAccount(acc);
+            }
+        }*/
         
     }
 }

@@ -13,12 +13,7 @@ namespace SupportBank
             List<Transaction> parsedTransactions =
                 Bank.LoadAllTransactionsFromCsv(@"C:\Work\Training\SupportBank\SupportBank\Transactions2014.csv");
 
-            List<string> uniqueNames = Account.GetNames(parsedTransactions);
-
-            foreach (var n in uniqueNames)
-            {
-                Console.WriteLine(n);
-            }
+            Dictionary<string,Account> allAccounts = Bank.PopulateNewAccountDictionary(parsedTransactions);
 
         }
     }
