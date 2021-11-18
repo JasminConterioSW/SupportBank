@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace SupportBank
 {
@@ -22,13 +23,17 @@ namespace SupportBank
                 
             }
             
-            // Print out all transactions
+            /*// Print out all transactions
             foreach (var t in parsedTransactions)
             {
                 Transaction.PrintTransaction(t);
             }
+            */
 
             return parsedTransactions;
         }
+
+        
+        
     }
 }
