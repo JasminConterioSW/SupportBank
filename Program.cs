@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 
+
 namespace SupportBank
 {
     
-  class Transaction
+    class Transaction
     {
         public string date;
         public string nameFrom;
@@ -17,10 +18,8 @@ namespace SupportBank
     
     class Program
     {
-        private List<Transaction> parsedTransactions;
-
-
-        private static void ParseLine(string data)
+        
+        private static Transaction ParseLine(string data)
         {
             string[] dataFields = data.Split(',');
 
@@ -31,13 +30,12 @@ namespace SupportBank
             currentTransaction.narrative = dataFields[3];
             currentTransaction.amount = Convert.ToDecimal(dataFields[4]);
 
-
-            Console.WriteLine(currentTransaction.amount);
+            return currentTransaction;
         }
         
         static void Main(string[] args)
         {
-            
+            List<Transaction> parsedTransactions = new List<Transaction>();
             
             // Open file, read in line by line
             using (StreamReader sr = new StreamReader(@"C:\Work\Training\SupportBank\SupportBank\Transactions2014.csv"))
@@ -47,21 +45,11 @@ namespace SupportBank
 
                 while ((data = sr.ReadLine()) != null)
                 {
-                    ParseLine(data);
+                    parsedTransactions.Add(ParseLine(data));
                 }
                 
-                
-
             }
-                
-            
-            
-            
         }
     }
-
-    
-    
-    
 }
 
