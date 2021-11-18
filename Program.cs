@@ -14,11 +14,12 @@ namespace SupportBank
             banker.ParsedTransactions = Bank.LoadAllTransactionsFromCsv(@"C:\Work\Training\SupportBank\SupportBank\Transactions2014.csv");
             banker.AllAccounts = Account.PopulateNewAccountDictionary(banker.ParsedTransactions);
             
-            // List All
+            /*// List All
             Bank.PrintAllAccountBalances(banker.AllAccounts);
+            */
             
             // List Account
-            
+            Bank.PrintAccountTransactions(banker.AllAccounts["Tim L"]);
             
 
         }

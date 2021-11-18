@@ -46,5 +46,14 @@ namespace SupportBank
                 Account.PrintAccountBalance(acc.Value);
             }
         }
+
+        public static void PrintAccountTransactions(Account account)
+        {
+            List<Transaction> accountTransactions = account.AccountTransactions;
+            foreach (Transaction t in accountTransactions)
+            {
+                Transaction.PrintTransaction(t);
+            }
+        }
     }
 }
