@@ -5,33 +5,8 @@ using System.IO;
 
 namespace SupportBank
 {
-    
-    class Transaction
-    {
-        public string date;
-        public string nameFrom;
-        public string nameTo;
-        public string narrative;
-        public decimal amount;
-        
-    }
-    
     class Program
     {
-        
-        private static Transaction ParseLine(string data)
-        {
-            string[] dataFields = data.Split(',');
-
-            Transaction currentTransaction = new Transaction();
-            currentTransaction.date = dataFields[0];
-            currentTransaction.nameFrom = dataFields[1];
-            currentTransaction.nameTo = dataFields[2];
-            currentTransaction.narrative = dataFields[3];
-            currentTransaction.amount = Convert.ToDecimal(dataFields[4]);
-
-            return currentTransaction;
-        }
         
         static void Main(string[] args)
         {
@@ -45,7 +20,7 @@ namespace SupportBank
 
                 while ((data = sr.ReadLine()) != null)
                 {
-                    parsedTransactions.Add(ParseLine(data));
+                    parsedTransactions.Add(Transaction.ParseLineCsv(data));
                 }
                 
             }
