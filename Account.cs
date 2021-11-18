@@ -7,7 +7,7 @@ namespace SupportBank
     {
         public string Name;
         public decimal Balance;
-        
+        public List<Transaction> AccountTransactions;
 
 
         
@@ -36,13 +36,14 @@ namespace SupportBank
             Account account = new Account();
             account.Name = accountName;
             account.Balance = 0;
-            
+            account.AccountTransactions = new List<Transaction>();
+
             return account;
         }
         
-        public static Dictionary<string,Account>  InitialiseAccountDictionary(List<string> accountNames)
+        public static Dictionary<string, Account> InitialiseAccountDictionary(List<string> accountNames)
         {
-            Dictionary<string,Account> accountDict= new Dictionary<string,Account>();
+            Dictionary<string, Account> accountDict= new Dictionary<string, Account>();
 
             foreach (var aName in accountNames)
             {
@@ -52,9 +53,33 @@ namespace SupportBank
             return accountDict;
 
         }
+
+        public static Dictionary<string,Account> PopulateNewAccountDictionary(List<Transaction> parsedTransactions)
+        {
+            // Complete but not properly tested
+            List<string> uniqueNames = Account.GetNames(parsedTransactions);
+            Dictionary<string,Account> allAccounts = Account.InitialiseAccountDictionary(uniqueNames);
+            
+            foreach (var t in parsedTransactions)
+            {
+                string nameTo = t.NameTo;
+                string nameFrom = t.NameFrom;
+                decimal amount = t.Amount;
+
+                allAccounts[nameTo].Balance += amount;
+                allAccounts[nameFrom].Balance -= amount;
+                allAccounts[nameTo].AccountTransactions.Add(t);
+                allAccounts[nameFrom].AccountTransactions.Add(t);
+
+            }
+
+            return allAccounts;
+        }
+
         
         
-        public static void PrintAccount(Account acc)
+        
+        public static void PrintAccountBalance(Account acc)
         {
             string outputString = "";
             
@@ -69,6 +94,5 @@ namespace SupportBank
 
             Console.WriteLine(outputString);
         }
-
     }
 }

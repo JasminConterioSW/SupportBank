@@ -10,12 +10,17 @@ namespace SupportBank
         
         static void Main(string[] args)
         {
-            List<Transaction> parsedTransactions =
-                Bank.LoadAllTransactionsFromCsv(@"C:\Work\Training\SupportBank\SupportBank\Transactions2014.csv");
+            Bank banker = new Bank();
+            banker.ParsedTransactions = Bank.LoadAllTransactionsFromCsv(@"C:\Work\Training\SupportBank\SupportBank\Transactions2014.csv");
+            banker.AllAccounts = Account.PopulateNewAccountDictionary(banker.ParsedTransactions);
+            
+            // List All
+            Bank.PrintAllAccountBalances(banker.AllAccounts);
+            
+            // List Account
+            
+            
 
-            Dictionary<string,Account> allAccounts = Bank.PopulateNewAccountDictionary(parsedTransactions);
-
-            Bank.PrintAllAccounts(allAccounts);
         }
     }
 }

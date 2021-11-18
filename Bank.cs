@@ -7,6 +7,9 @@ namespace SupportBank
 {
     public class Bank
     {
+        public List<Transaction> ParsedTransactions;
+        public Dictionary<string, Account> AllAccounts;
+        
         public static List<Transaction> LoadAllTransactionsFromCsv(string filename)
         {
             List<Transaction> parsedTransactions = new List<Transaction>();
@@ -34,33 +37,14 @@ namespace SupportBank
             return parsedTransactions;
         }
 
-        public static Dictionary<string,Account> PopulateNewAccountDictionary(List<Transaction> parsedTransactions)
-        {
-            // Complete but not properly tested
-            List<string> uniqueNames = Account.GetNames(parsedTransactions);
-            Dictionary<string,Account> allAccounts = Account.InitialiseAccountDictionary(uniqueNames);
-            
-            foreach (var t in parsedTransactions)
-            {
-                string nameTo = t.NameTo;
-                string nameFrom = t.NameFrom;
-                decimal amount = t.Amount;
+        
 
-                allAccounts[nameTo].Balance += amount;
-                allAccounts[nameFrom].Balance -= amount;
-
-            }
-
-            return allAccounts;
-        }
-
-        public static void PrintAllAccounts(Dictionary<string,Account> allAccounts)
-        { // very much incomplete
+        public static void PrintAllAccountBalances(Dictionary<string,Account> allAccounts)
+        { 
             foreach (KeyValuePair<string,Account> acc in allAccounts)
             {
-                Account.PrintAccount(acc.Value);
+                Account.PrintAccountBalance(acc.Value);
             }
         }
-        
     }
 }
