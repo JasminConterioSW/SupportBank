@@ -10,26 +10,11 @@ namespace SupportBank
         
         static void Main(string[] args)
         {
-            List<Transaction> parsedTransactions = new List<Transaction>();
-            
-            // Open file, read in line by line
-            using (StreamReader sr = new StreamReader(@"C:\Work\Training\SupportBank\SupportBank\Transactions2014.csv"))
-            {
-                string data;
-                string header = sr.ReadLine();
 
-                while ((data = sr.ReadLine()) != null)
-                {
-                    parsedTransactions.Add(Transaction.ParseLineCsv(data));
-                }
-                
-            }
+            List<Transaction> parsedTransactions =
+                Bank.LoadAllTransactionsFromCsv(@"C:\Work\Training\SupportBank\SupportBank\Transactions2014.csv");
             
-            // Print out all transactions
-            foreach (var t in parsedTransactions)
-            {
-                Transaction.PrintTransaction(t);
-            }
+            
         }
     }
 }
