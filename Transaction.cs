@@ -4,25 +4,32 @@ namespace SupportBank
 {
     public class Transaction
     {
+        public string Date;
+        public string NameFrom;
+        public string NameTo;
+        public string Narrative;
+        public decimal Amount;
+        
         public static Transaction ParseLineCsv(string data)
         {
             string[] dataFields = data.Split(',');
 
             Transaction currentTransaction = new Transaction();
-            currentTransaction.date = dataFields[0];
-            currentTransaction.nameFrom = dataFields[1];
-            currentTransaction.nameTo = dataFields[2];
-            currentTransaction.narrative = dataFields[3];
-            currentTransaction.amount = Convert.ToDecimal(dataFields[4]);
+            currentTransaction.Date = dataFields[0];
+            currentTransaction.NameFrom = dataFields[1];
+            currentTransaction.NameTo = dataFields[2];
+            currentTransaction.Narrative = dataFields[3];
+            currentTransaction.Amount = Convert.ToDecimal(dataFields[4]);
 
             return currentTransaction;
         }
-        
-        public string date;
-        public string nameFrom;
-        public string nameTo;
-        public string narrative;
-        public decimal amount;
+
+        public static void PrintTransaction(Transaction currentTransaction)
+        {
+            string outputString =
+                $"{currentTransaction.Date}: From {currentTransaction.NameFrom} to {currentTransaction.NameTo}, {currentTransaction.Narrative}, £{currentTransaction.Amount}";
+            Console.WriteLine(outputString);
+        }
         
     }
 }

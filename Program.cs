@@ -24,6 +24,12 @@ namespace SupportBank
                 }
                 
             }
+            
+            // Print out all transactions
+            foreach (var t in parsedTransactions)
+            {
+                Transaction.PrintTransaction(t);
+            }
         }
     }
 }
