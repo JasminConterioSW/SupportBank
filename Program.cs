@@ -18,6 +18,22 @@ namespace SupportBank
     class Program
     {
         private List<Transaction> parsedTransactions;
+
+
+        private static void ParseLine(string data)
+        {
+            string[] dataFields = data.Split(',');
+
+            Transaction currentTransaction = new Transaction();
+            currentTransaction.date = dataFields[0];
+            currentTransaction.nameFrom = dataFields[1];
+            currentTransaction.nameTo = dataFields[2];
+            currentTransaction.narrative = dataFields[3];
+            currentTransaction.amount = Convert.ToDecimal(dataFields[4]);
+
+
+            Console.WriteLine(currentTransaction.amount);
+        }
         
         static void Main(string[] args)
         {
@@ -31,17 +47,7 @@ namespace SupportBank
 
                 while ((data = sr.ReadLine()) != null)
                 {
-                    string[] dataFields = data.Split(',');
-
-                    Transaction currentTransaction = new Transaction();
-                    currentTransaction.date = dataFields[0];
-                    currentTransaction.nameFrom = dataFields[1];
-                    currentTransaction.nameTo = dataFields[2];
-                    currentTransaction.narrative = dataFields[3];
-                    currentTransaction.amount = Convert.ToDecimal(dataFields[4]);
-
-
-                    Console.WriteLine(currentTransaction.amount);
+                    ParseLine(data);
                 }
                 
                 
