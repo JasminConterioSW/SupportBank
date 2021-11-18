@@ -15,6 +15,7 @@ namespace SupportBank
 
             Dictionary<string,Account> allAccounts = Bank.PopulateNewAccountDictionary(parsedTransactions);
 
+            Bank.PrintAllAccounts(allAccounts);
         }
     }
 }

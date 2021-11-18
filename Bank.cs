@@ -54,14 +54,13 @@ namespace SupportBank
             return allAccounts;
         }
 
-        /*public static void PrintAllAccounts(Dictionary<string,Account> allAccounts)
+        public static void PrintAllAccounts(Dictionary<string,Account> allAccounts)
         { // very much incomplete
-            foreach (KeyValuePair acc in allAccounts)
+            foreach (KeyValuePair<string,Account> acc in allAccounts)
             {
-
-                allAccounts.PrintAccount(acc);
+                Account.PrintAccount(acc.Value);
             }
-        }*/
+        }
         
     }
 }
